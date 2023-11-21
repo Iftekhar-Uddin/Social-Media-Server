@@ -47,7 +47,7 @@ app.use('/api/messages', messagesRoutes);
 app.use('/api/posts', varify, postRoutes);
 app.use('/api/users', varify,  userRoutes);
 
-const CONNECTION_URL = "mongodb+srv://iftekharuddin720:pPg8idrmwArzKEGB@cluster0.tfevxc9.mongodb.net/";
+const CONNECTION_URL = process.env.SERVER;
 const PORT = process.env.PORT || 5000;
 mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(()=> app.listen(PORT, ()=> console.log(`Server is running on port: ${PORT}`)))
