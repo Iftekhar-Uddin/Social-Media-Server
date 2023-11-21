@@ -31,10 +31,10 @@ router.post("/register", async (req, res) => {
 router.post('/login', async (req, res)=>{
   try {
     const  user = await User.findOne({email: req.body.email});
-    !user && res.status(404).json("user not found");
+    if(!user) return res.status(404).json("user not found");
     const validPassword = await bcrypt.compare(req.body.password, user.password);
-    !validPassword && res.status(400).json("wrong password");
-    const token = jwt.sign({email: user.email, id: user._id}, 'test', {expiresIn: "1h"});
+    if(!validPassword) return res.status(400).json("wrong password");
+    const token = jwt.sign({username: user.username, id: user._id}, 'mind', {expiresIn: "1h"});
     res.status(200).json({result: user, token});
 
   } catch (error) {

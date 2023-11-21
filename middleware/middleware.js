@@ -1,24 +1,16 @@
 import  jwt from 'jsonwebtoken';
 
-const varification = async (req, res, next) => {
+const varify = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
-        const isCustomAuth = token.length < 500;
-
-        let decodedData;
-
-        if(token && isCustomAuth) {
-            decodedData = jwt.verify(token, 'test');
-            req.username = decodedData.user;
-            req.userId = decodedData?.id;
-        }
+        const decodedData = jwt.verify(token, 'mind');
+        const {username, id} = decodedData;
+        req.username = username;
+        req.userId = id;
         next();
-
     } catch (error) {
         console.log(error)
     }
-
-
 };
 
-export default varification;
+export default varify;
