@@ -15,15 +15,15 @@ const UserSchema = mongoose.Schema(
       max: 50,
       unique: true,
     },
-    phone: {
-      type: String,
-      max: 15,
-      unique: true,
-    },
     password: {
       type: String,
       required: true,
       min: 6,
+    },
+    phone: {
+      type: String,
+      max: 15,
+      unique: true,
     },
     date_of_birth: {
       type: String,
